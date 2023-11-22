@@ -9,7 +9,7 @@ from django.template import loader
 
 def classroom(request):
 
-    template = loader.get_template('base.html')
+    template = loader.get_template('classroom.html')
     # context = {
     #     'myStudents' : mystudents,
     # }
