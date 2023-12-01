@@ -4,6 +4,16 @@
 {% comment %} block này hiển thị thông tin điểm của học sinh khi gáo viên bộ môn nhấn vào {% endcomment %}
 
 {% block content %}
-
+<h1>Login</h1>
+<form action='.' method='POST'>
+    {% csrf_token %}
+    {% for key,value in form.errors.items %}
+        {{value}}
+    {% endfor %}
+    <p> <label> Tài Khoản: </lable>{{form.username}} </p>
+    <p> <label> Mật Khẩu: </lable>{{form.password}} </p>
+    <input type="hidden" name="next" value="/">
+    <input type="submit" value="Đăng Nhập">
+    </form>
 
 {% endblock content %}
