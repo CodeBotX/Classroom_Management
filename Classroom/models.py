@@ -36,7 +36,7 @@ class Teacher (models.Model):
 # ---------- Class student ----------
 class Student(models.Model):
   name = models.CharField(max_length=100)
-  student_comment = models.TextField()
+  student_comment = models.TextField(blank=True, null=True)
   student_id = models.IntegerField(unique=True, validators=[MinValueValidator(100000), MaxValueValidator(999999)])
   grade_Math = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
   grade_english = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])

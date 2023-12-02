@@ -4,6 +4,11 @@
 {% comment %} block này hiển thị page home, có lựa chọn đăng nhập, dạy học, xem điểm   {% endcomment %}
 
 {% block content %}
-
-
+<ul>
+    {% for x in myStudents %}
+      <li>
+        {{x.name}} - {{x.student_id}}
+    </li>
+    {% endfor %}
+  </ul> 
 {% endblock content %}

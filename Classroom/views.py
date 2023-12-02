@@ -11,12 +11,11 @@ from django.http import HttpResponseRedirect
 
 
 def classroom(request):
-
     template = loader.get_template('classroom.html')
-    # context = {
-    #     'myStudents' : mystudents,
-    # }
-    return HttpResponse(template.render())
+    contex={
+      'name':'le minh tien',
+    }
+    return HttpResponse(template.render(contex,request))
 
 
 def register (request):
@@ -31,3 +30,12 @@ def register (request):
     'form': form
   }
   return HttpResponse(template.render(context,request))
+
+
+def Home(request):
+    mystudents = Student.objects.all()
+    template = loader.get_template('home.html')
+    context = {
+        'myStudents' : mystudents,
+    }
+    return HttpResponse(template.render(context,request))
