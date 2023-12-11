@@ -7,43 +7,53 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # ---------- Class đối tượng các tiết học ----------
-class Lesson(models.Model):
-    LESSON_GRADE_CHOICES = [
-        ('A', 'A'),
-        ('B', 'B'),
-        ('C', 'C'),
-        ('D', 'D'),
-    ]
-    lesson_name = models.CharField(max_length=100)
-    comment = models.TextField(blank=True)
-    grade = models.CharField(max_length=1, choices=LESSON_GRADE_CHOICES)
-    schedule_time = models.DateTimeField()
-
-    def __str__(self):
-        return f"{self.lesson_name} - {self.schedule_time}"
-
-# ----------------------------------------------------------------
 
 
 # ---------- Class teacher ----------
 class Teacher (models.Model):
-  name = models.CharField(max_length=100)
-  subject_teacher = models.CharField(max_length=100)
-  teacher_id = models.IntegerField(unique=True, validators=[MinValueValidator(100000), MaxValueValidator(999999)])
-  def __str__(self):
-      return f"{self.name} - {self.teacher_id}"  
+    name = models.CharField(max_length=100)
+    subject_teacher = models.CharField(max_length=100)
+    id = models.IntegerField(primary_key=True)
+    def __str__(self):
+        return f"{self.name} - {self.teacher_id}"  
+
+    def save(self, *args, **kwargs):
+    # Kiểm tra xem id có đúng 6 chữ số hay không
+        if len(str(self.id)) != 6:
+            raise ValidationError("ID phải có 6 chữ số.")
+    
+        super().save(*args, **kwargs)
 
 # ---------- Class student ----------
 class Student(models.Model):
-  name = models.CharField(max_length=100)
-  student_comment = models.TextField(blank=True, null=True)
-  student_id = models.IntegerField(unique=True, validators=[MinValueValidator(100000), MaxValueValidator(999999)])
-  grade_Math = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
-  grade_english = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
-  grade_physics = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
-  grade_chemistry = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
-  grade_literature = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
-  grade_IT = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
-  
-  def __str__(self):
-      return f"{self.name} - {self.student_id}"
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return f"{self.name} - {self.id}"
+    def save(self, *args, **kwargs):
+        # Kiểm tra xem id có đúng 6 chữ số hay không
+        if len(str(self.id)) != 6:
+            raise ValidationError("ID phải có 6 chữ số.")
+        
+        super().save(*args, **kwargs)
+
+class Subjects (models.Model):
+    SUBJECT_CHOICES = [
+        ('MAT', 'Math'),
+        ('ENG', 'English'),
+        ('PHY', 'Physics'),
+        ('CHE', 'Chemistry'),
+        ('LIT', 'Literature'),
+        ('CPS', 'computer science'),
+    ]
+    name = models.CharField(max_length=3, choices=SUBJECT_CHOICES)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    score = models.FloatField()
+    def __str__(self):
+        return f"{self.student.id} - {self.student.name} - {self.name} - {self.score}"
+    def save(self, *args, **kwargs):
+    # Kiểm tra xem score có đúng 6 chữ số hay không
+        if self.score < 0 and self.score>10:
+            raise ValidationError("Điểm từ 0 đến 10")
+    
+        super().save(*args, **kwargs)
