@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock title %}
 
-{% comment %} block này hiển thị thông tin điểm của học sinh khi gáo viên bộ môn nhấn vào {% endcomment %}
+{% comment %} block này hiển thị thông tin điểm của học sinh khi giáo viên bộ môn nhấn vào {% endcomment %}
 
 {% block content %}
-<h1>Login</h1>
-<form action='.' method='POST'>
+{% comment %} <h1>Login</h1>
+<form action='.' method='POST'> 
     {% csrf_token %}
     {% for key,value in form.errors.items %}
         {{value}}
@@ -14,6 +14,110 @@
     <p> <label> Mật Khẩu: </lable>{{form.password}} </p>
     <input type="hidden" name="next" value="/">
     <input type="submit" value="Đăng Nhập">
-    </form>
+    </form> {% endcomment %}
 
+<div style="background-color: #F79630;">
+    <div>
+      <div class="row">
+        <div class="col-sm-5">
+          <h1 class="text-white text-center font-weight-bold" style="margin-top: 20%; font-size: 70px">CLASS 4.0</h1>
+        
+        </div>
+  
+        <div class="col-sm-7 min-vh-100 row" style="">
+          <div class="col-sm-2"></div> 
+          <div class="col-sm-8 row " style=" background-color: aliceblue; border-radius: 25px; margin-top: 15%; margin-bottom: 15%;">
+            <div class="d-flex align-items-center">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">     <!--khối form đăng nhập-->
+                <div>
+                    <h4 style= "outline: #F79630 solid 7px; text-align: center; margin-left: 2%; margin-right: 2% ;">ĐĂNG NHẬP</h4>
+                    <p></p>
+                </div>
+                
+                <div class="btn-group btn-group-lg d-flex justify-content-center">  <!--khối group button-->
+                  <button type="button" class="btn btn-primary" href="" data-toggle="collapse" data-target="#sinh_hoat">Sinh hoạt</button>
+                  <button type="button" class="btn btn-primary" href="" data-toggle="collapse" data-target="#day_hoc">Dạy học</button>
+                  <button type="button" class="btn btn-primary" href="" data-toggle="collapse" data-target="#tra_cuu">Tra cứu</button>
+                </div>
+  
+                <div>  <!--khối đăng nhập-->
+                  <div id="sinh_hoat" class="collapse"> <!--khoi dang nhap cho sinh hoat-->
+                    <p></p> <!--tạo khoảng cách thôi-->
+                    <p class="text-center font-weight-bold">SINH HOẠT</p>
+                    <form action="/action_page.php">
+                      <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                      </div>
+                      <div class="mb-3">
+                        <label for="pwd" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                      </div>
+                    
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+  
+                  </div>
+  
+                  <div id="day_hoc" class="collapse"> <!--khoi dang nhap cho day hoc-->
+                    <p></p>
+                    <p class="text-center font-weight-bold">DẠY HỌC</p>
+                    <form action='.' method='POST'>
+                      {% csrf_token %}
+                      {% for key,value in form.errors.items %}
+                          {{value}}
+                      {% endfor %}
+                      <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Username:</label>
+                        {% comment %} <input type="email" class="form-control" id="Username" placeholder="Enter Username" name="Username"> {% endcomment %}
+                        {{form.username}}
+                      </div>
+                      <div class="mb-3">
+                        <label for="pwd" class="form-label">Password:</label>
+                        {% comment %} <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd"> {% endcomment %}
+                        {{form.password}}
+                      </div>
+                      <input type= "hidden" name="next" value="/classroom"/>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+  
+                  </div>
+  
+                  <div id="tra_cuu" class="collapse"> <!--khoi dang nhap cho tra cuu-->
+                    <p></p>
+                    <p class="text-center font-weight-bold">TRA CỨU</p>
+                    {% comment %} form Login {% endcomment %}
+                    <form action='.' method='POST'>
+                      {% csrf_token %}
+                      <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Username:</label>
+                        <input type="email" class="form-control" id="Username" placeholder="Enter Username" name="Username">
+                      </div>
+                      <div class="mb-3">
+                        <label for="pwd" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                      </div>
+                      <input type="submit" class="btn btn-primary">Submit</input>
+                    </form>
+                      {% comment %} end form {% endcomment %}
+                  </div>
+  
+                  <script>
+                    // Sử dụng sự kiện show.bs.collapse để ẩn collapse khác khi một collapse được mở
+                    $(document).ready(function(){
+                      $('#sinh_hoat, #day_hoc, #tra_cuu').on('show.bs.collapse', function () {
+                        $('#sinh_hoat, #day_hoc, #tra_cuu').not(this).collapse('hide');
+                      });
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>  
+          
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock content %}

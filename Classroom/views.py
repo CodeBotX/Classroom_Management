@@ -5,17 +5,19 @@ from .models import *
 from .forms import RegistrationForm
 from django.http import HttpResponseRedirect
 
+
 # from django.http import HttpResponseRedirect
 
 # Create your views here.
 
 
 def classroom(request):
+    mystudents = Student.objects.all()
     template = loader.get_template('classroom.html')
-    contex={
-      'name':'le minh tien',
+    context = {
+        'myStudents' : mystudents,
     }
-    return HttpResponse(template.render(contex,request))
+    return HttpResponse(template.render(context,request))
 
 
 def register (request):
@@ -33,9 +35,6 @@ def register (request):
 
 
 def Home(request):
-    mystudents = Student.objects.all()
     template = loader.get_template('home.html')
-    context = {
-        'myStudents' : mystudents,
-    }
-    return HttpResponse(template.render(context,request))
+    return HttpResponse(template.render())
+  

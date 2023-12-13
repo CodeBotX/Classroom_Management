@@ -7,6 +7,21 @@
 
     {% comment %} code viết trong này{% endcomment %}
     <h1>Hello classroom</h1>
+    {% block header %}
+    <div class ="col-sm-1 ">
+        {% if user.Username %}
+            <p>{{user.Username}}</p>
+            <p><a href = {%url 'logout'%}></a>Đăng Xuất</p>
+        {% endif %}
+    </div>
+  {% endblock header %} 
+    <ul>
+        {% for x in myStudents %}
+          <li>
+            {{x.name}} - {{x.student_id}}
+        </li>
+        {% endfor %}
+      </ul> 
     
 {% endblock %}
 

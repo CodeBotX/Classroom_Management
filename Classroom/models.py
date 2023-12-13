@@ -6,9 +6,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 
-# ---------- Class đối tượng các tiết học ----------
-
-
 # ---------- Class teacher ----------
 class Teacher (models.Model):
     name = models.CharField(max_length=100)
@@ -57,3 +54,4 @@ class Subjects (models.Model):
             raise ValidationError("Điểm từ 0 đến 10")
     
         super().save(*args, **kwargs)
+        
