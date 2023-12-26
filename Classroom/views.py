@@ -4,13 +4,13 @@ from django.template import loader
 from .models import *
 from .forms import RegistrationForm
 from django.http import HttpResponseRedirect
-
+from django.contrib.auth.decorators import login_required
 
 # from django.http import HttpResponseRedirect
 
 # Create your views here.
 
-
+@login_required(login_url='/login/')
 def classroom(request):
     mystudents = Student.objects.all()
     template = loader.get_template('classroom.html')
