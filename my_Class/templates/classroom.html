@@ -11,23 +11,143 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
 
 {% block content %}
 
+
     {% comment %} code viết trong này{% endcomment %}
-    <h1>Hello classroom</h1>
-    {% block header %}
-    <div class ="col-sm-1 ">
-        {% if user.Username %}
-            <p>{{user.Username}}</p>
-            <p><a href = {%url 'logout'%}></a>Đăng Xuất</p>
-        {% endif %}
+    {% comment %} <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Dropdown</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Link</a></li>
+          <li><a class="dropdown-item" href="#">Another link</a></li>
+          <li><a class="dropdown-item" href="#">A third link</a></li>
+        </ul>
+      </li> {% endcomment %}
+<body style="background-color: #2385C4;">
+  <div>
+    <div class="container-fluid" style="margin-top: 5% ">
+      <div class="container-fluid row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+          <div style="" class="row">
+            <p class="col-3  display-6 font-weight-bold text-white">Sơ đồ lớp</p>
+            <p class="col-5"></p>
+            <p class="col-2 display-7  text-white text-center" style="font-size: 30px">Tên lớp </p>
+            <p class="col-2 display-7  text-white text-center" style="font-size: 30px">Tuần </p>
+          </div>
+          <div class="row" style="margin-top: 20px margin-bottom: 20px">
+                  <table class="col-sm-3 table-striped table-bodered table-hover table-light table-responsive-sm" style="border-collapse: separate; border-spacing: 0">
+                    <thead>
+                      <th class="text-center lead font-weight-bold">Dãy 1</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+                  <table class="col-sm-3 table-striped table-bodered table-hover table-light table-responsive-sm " style="border-collapse: separate; border-spacing: 0">
+                    <thead>
+                    <th class="text-center lead font-weight-bold">Dãy 2</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+                  <table class="col-sm-3 table-striped table-bodered table-hover table-light table-responsive-sm" style="border-collapse: separate; border-spacing: 0">
+                    <thead>
+                    <th class="text-center lead font-weight-bold">Dãy 3</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+                  <table class="col-sm-3 table-striped table-bodered table-hover table-light table-responsive-sm" style="border-collapse: separate; border-spacing: 0">
+                    <thead>
+                    <th class="text-center lead font-weight-bold">Dãy 4</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center p-5"><button href = "" class="text-white btn btn-primary">Nguyễn Văn A</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            
+
+            
+          </div>
+          <div class="input-group" style="margin-top: 30px ; margin-bottom: 50px">
+            <span class="input-group-text"><button href = "" class="text-dark btn">Nhận xét</button></span>
+            <textarea class="form-control" aria-label="Nhận xét" style="width:80%; height: 150px"></textarea>
+          </div>
+        </div>
+        <div class="col-sm-1"></div>
+
+      </div>
+
     </div>
-  {% endblock header %} 
-    <ul>
-        {% for x in myStudents %}
-          <li>
-            {{x.name}} - {{x.student_id}}
-        </li>
-        {% endfor %}
-      </ul> 
+    
+  </div>  
+  
+</body>
+      
+    
     
 {% endblock %}
 

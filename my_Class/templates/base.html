@@ -29,32 +29,40 @@ tạo các block tĩnh, và block để các file khác kế thừa
     </head>
     <body>
         {% block Header %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #11499C">
+          <div class="container-fluid">
             <div class="container-fluid">
-              <a class="navbar-brand" >Class 4.0</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <a class="navbar-brand text-white font-weight-bold nav-link active" aria-current="page" style="font-size: 200%" href="/home" >Class 4.0</a>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/home">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                  </li>
+                   
                 </ul>
-                <div class='col-sm-1'>
+                <div class="col-sm-2 row col">
                     {% if user.username %}
-                        <p>{{user.username}}</p>
-                        <p><a href = "{% url 'logout' %}"> Đăng Xuất </a></p>
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <div class="col-sm-6">
+                          <p class="text-white text-center" style="height: 100%;
+                          line-height: 100%;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;">{{user.username}}</p>
+                      </div>
+                      <div class="col-sm-6">    
+                          <li class="nav-item">
+                            <button href = "{% url 'logout' %}" class="nav-link btn btn-primary text-white" href="/login">Log out</button>
+                          </li>
+                      </div>  
+                    
+                    </ul>
                     {% else %}
-                        <p></p>
+                      <button href = "/login" class="text-white btn btn-primary">Log in</button>
                     {% endif %}
                 </div>
               </div>
-            </div>
-          </nav>
+            </div>  
+          </div>
+        </nav>
         {% endblock Header %}
         {% block content %}
         

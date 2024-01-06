@@ -40,5 +40,5 @@ def register_view (request):
 
 
 class siteLoginView ( TemplateView ):
-  #  tạm thời để login 2
+
   template_name = 'login.html' 
