@@ -7,6 +7,18 @@
 {% endcomment %}
 
 {% block content %}
+<h1>Thông tin học sinh</h1>
+<p>ID: {{ student.student_ID }}</p>
+<p>Tên: {{ student.student_name }}</p>
+<p>Lớp: {{ student.classroom }}</p>
+
+<h2>Điểm</h2>
+{% for score in scores %}
+<p>Môn: {{ score.subject }}</p>
+<p>Điểm K1: {{ score.K1_score }}</p>
+<p>Điểm K2: {{ score.K2_score }}</p>
+<p>Điểm K3: {{ score.K3_score }}</p>
+{% endfor %}
 
 
 {% endblock content %}

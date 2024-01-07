@@ -30,7 +30,6 @@ class Class(models.Model):
     subjects = models.ManyToManyField(Subject)
     def __str__(self):
         return  f"{self.class_CODE}"
-    
 # ---------- Class student ----------
 class Student(models.Model):
     student_ID = models.IntegerField(primary_key=True,auto_created=True)

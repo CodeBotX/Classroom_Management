@@ -27,3 +27,40 @@ class RegistrationForm(forms.Form):
         raise forms.ValidationError('Tài Khoản Đã Tồn Tại')
     def save(self):
         User.objects.create_user(username=self.cleaned_data['username'], email=self.cleaned_data['email'], password=self.cleaned_data['password2'])
+        
+class StudentIDForm(forms.Form):
+    student_id = forms.IntegerField(
+        label='Student ID',
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'Student ID',
+                'placeholder': 'Enter Student ID',
+                'name': 'Student ID'
+            }
+        )
+    )
+
+from django.contrib.auth.forms import AuthenticationForm
+
+class CustomLoginForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'Student ID',
+                'placeholder': 'Enter Student ID',
+                'name': 'Student ID'
+            }
+        )
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'Password',
+                'placeholder': 'Enter Password',
+                'name': 'Password'
+            }
+        )
+    )
