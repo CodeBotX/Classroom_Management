@@ -21,15 +21,14 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
           <li><a class="dropdown-item" href="#">A third link</a></li>
         </ul>
       </li> {% endcomment %}
-<div style="background-color: #2385C4;">
+<div>
   <div>
     <div class="container-fluid" style="margin-top: 5% ">
       <div class="container-fluid row">
         <div class="col-sm-1"></div>
-        <div class="col-sm-10">
-          <div style="" class="row">
-            <p class="col-5"></p>
-            <div class="container px-4">
+        <div class="col-sm-9">
+          <div style="  margin-bottom: 10px" class="row">
+            <div class="container px-4" style="margin-top: 10px">
               <div class="row gx-5">
                 <div class="col">
                   <div class="container px-4 overflow-hidden">
@@ -46,14 +45,9 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
               </div>
             </div>
             {% comment %} <p class="col-2 display-7  text-white text-center" style="font-size: 30px">{{class}} </p> {% endcomment %}
-            <div class="card col-2 display-7">
-              <div class="card-body">
-                <p class="text-Blue text-center" style="font-size: 30px">{{ current_time }}</p>
-              </div>
-            </div>
            
           </div>
-            <div class="card">
+            <div class="card" style="margin-top: 20px; margin-bottom: 10px">
               <div class="card-body">
                 <h5 class="card-title">Sơ Đồ Lớp</h5>
                 <div class="row row-cols-4" style="margin-top: 20px margin-bottom: 20px">
@@ -82,7 +76,13 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
               <textarea class="form-control" aria-label="Nhận xét" style="width:80%; height: 150px"></textarea>
             </div>
         </div>
-        <div class="col-sm-1"></div>
+        <div class="col-sm-2">
+          <div class="card display-7">
+            <div class="card-body">
+              <p class="text-Blue text-center" style="font-size: 20px">{{ current_time }}</p>
+            </div>
+          </div>
+        </div>
 
       </div>
 
@@ -91,8 +91,11 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
   </div>  
   
 </div>
+    
+{% endblock %}
+
+
       
     
     
-{% endblock %}
 

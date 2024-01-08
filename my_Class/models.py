@@ -79,4 +79,4 @@ class LessonReview(models.Model):
     rating = models.CharField(max_length=1, choices=REVIEW_CHOICES)  # Thêm trường xếp loại
 
     def __str__(self):
-        return f"{self.lesson.subject.get_subject_name()} - Review ID: {self.pk} - Rating: {self.get_rating_display()}"
+        return f"{self.lesson.subject.subject_name} - Review ID: {self.pk} - Rating: {self.get_rating_display()}"

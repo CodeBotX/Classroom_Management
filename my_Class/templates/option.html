@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Option{% endblock title %}
+
+
+{% block content %}
+<br>
+<br>
+<div class="card" style="width: 18rem">
+    <div class="card-body">
+        <form method="post">
+    {% csrf_token %}
+    <select name="class_code">
+        {% for class in classes %}
+            <option value="{{ class.class_CODE }}">{{ class.class_CODE }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Chọn">
+</form>
+
+{% if subjects %}
+    <h2>Môn học trong lớp {{ classes.class_CODE }}:</h2>
+    <ul>
+        {% for subject in subjects %}
+            <li>{{ subject.subject_name }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+    </div>
+</div>
+{% endblock content %}
