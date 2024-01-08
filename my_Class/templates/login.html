@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock title %}
+
+{% comment %} 
+4
+file login dùng để tạo trang đăng nhập cho giáo viên
+{% endcomment %}
+
+{% block content %}
+{% comment %} <h1>Login</h1>
+<form action='.' method='POST'> 
+    {% csrf_token %}
+    {% for key,value in form.errors.items %}
+        {{value}}
+    {% endfor %}
+    <p> <label> Tài Khoản: </lable>{{form.username}} </p>
+    <p> <label> Mật Khẩu: </lable>{{form.password}} </p>
+    <input type="hidden" name="next" value="/">
+    <input type="submit" value="Đăng Nhập">
+    </form> {% endcomment %}
+
+<div>
+    <div>
+      <div class="row">
+        <div class="col-sm-5">
+          <h1 class="text-white text-center font-weight-bold" style="margin-top: 20%; font-size: 70px">CLASS 4.0</h1>
+        
+        </div>
+  
+        <div class="col-sm-7 min-vh-100 row" style="">
+          <div class="col-sm-2"></div> 
+          <div class="col-sm-8 row " style=" background-color: aliceblue; border-radius: 25px; margin-top: 15%; margin-bottom: 15%;">
+            <div class="d-flex align-items-center">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">     <!--khối form đăng nhập-->
+                <div>
+                    <h4 style= "outline: #2385C4 solid 7px; text-align: center; margin-left: 2%; margin-right: 2% ;">ĐĂNG NHẬP</h4>
+                    <p></p>
+                </div>
+                
+                <div class="btn-group btn-group-lg d-flex justify-content-center">  <!--khối group button-->
+                  <button type="button" class="btn btn-primary" href="" data-toggle="collapse" data-target="#dang_nhap">Đăng nhập</button>
+                  <button type="button" class="btn btn-primary" href="" data-toggle="collapse" data-target="#tra_cuu">Tra cứu</button>
+                </div>
+  
+                <div>  <!--khối đăng nhập-->
+  
+                  <div id="dang_nhap" class="collapse"> <!--khoi dang nhap cho dang nhap-->
+                    <p></p>
+                    <p class="text-center font-weight-bold">ĐĂNG NHẬP</p>
+                    <form action='.' method='POST'>
+                      {% csrf_token %}
+                      {% for key,value in form.errors.items %}
+                          {{value}}
+                      {% endfor %}
+                      <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Username:</label>
+                        {% comment %} <input type="email" class="form-control" id="Username" placeholder="Enter Username" name="Username"> {% endcomment %}
+                        {{form.username}}
+                      </div>
+                      <div class="mb-3">
+                        <label for="pwd" class="form-label">Password:</label>
+                        {% comment %} <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd"> {% endcomment %}
+                        {{form.password}}
+                      </div>
+                      <input type= "hidden" name="next" value="/classroom"/>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+  
+                  </div>
+  
+                  <div id="tra_cuu" class="collapse"> <!--khoi dang nhap cho tra cuu-->
+                    <p></p>
+                    <p class="text-center font-weight-bold">TRA CỨU</p>
+                    <form method="post">
+                      {% csrf_token %}
+                      {{ form_student_ID }}
+                      <br>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                  </div>
+  
+                  <script>
+                    // Sử dụng sự kiện show.bs.collapse để ẩn collapse khác khi một collapse được mở
+                    $(document).ready(function(){
+                      $('#dang_nhap, #tra_cuu').on('show.bs.collapse', function () {
+                        $('#dang_nhap, #tra_cuu').not(this).collapse('hide');
+                      });
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>  
+          
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
