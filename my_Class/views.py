@@ -16,6 +16,7 @@ from django.contrib.auth.views import LoginView
 # Create your views here.
 
 
+classroom = Class.objects.get(class_CODE='6A')
 # view lớp học
 @login_required(login_url='/home/')
 def classroom_view(request):
@@ -26,7 +27,8 @@ def classroom_view(request):
   context = {
       'class':classroom,
       'Students' : students,
-      'current_time':now
+      'current_time':now,
+      'current_time':now,
   }
   return HttpResponse(template.render(context,request))
 
@@ -83,3 +85,61 @@ def student_grade_view(request, student_ID):
   return HttpResponse(template.render(context,request))
 
 # student_grade/<int:student_ID>
+# student_grade/<int:student_ID>
+
+def week_summary_view(request):
+  reviews = LessonReview.objects.all()  # Lấy tất cả đánh giá
+  template = loader.get_template('week_summary.html')
+  context = {
+    'week_review':reviews
+  }
+  return HttpResponse(template.render(context,request))
+
+from django.shortcuts import render, redirect
+from .models import Class
+
+# def subject_view(request, class_code):
+#     if request.method == 'POST':
+#         subject_code = request.POST.get('subject_code')
+#         # Xử lý lựa chọn của người dùng ở đây...
+#         # Ví dụ: chuyển hướng đến một trang khác với subject_code
+#         return redirect('some_view_name', subject_code=subject_code)
+#     else:
+#         class_obj = Class.objects.get(class_CODE=class_code)
+#         subjects = class_obj.subjects.all()
+#         return render(request, 'classroom.html', {'subjects': subjects})
+
+# def option_view(request):
+#     template = loader.get_template('option.html')
+#     classes = Class.objects.all()
+#     if request.method == 'POST':
+#         class_code = request.POST.get('class_code')
+#         class_obj = Class.objects.get(class_CODE=class_code)
+#         subjects = class_obj.subjects.all()
+#     else:
+#         subjects = None
+
+#     context = {
+#         'classes': classes,
+#         'subjects': subjects
+#     }
+#     return HttpResponse(template.render(context, request))
+
+
+
+def option_view(request):
+    if request.method == 'POST':
+        class_code = request.POST.get('class_code')
+        classroom = Class.objects.get(class_CODE=class_code)
+        subjects = classroom.subjects.all()
+    else:
+        classroom = None
+        subjects = None
+
+    classes = Class.objects.all()
+    context = {
+        'classroom': classroom,
+        'subjects': subjects,
+        'classes': classes,
+    }
+    return render(request, 'Option.html', context)

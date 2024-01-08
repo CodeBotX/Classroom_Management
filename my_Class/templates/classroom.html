@@ -25,19 +25,19 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
   <div>
     <div class="container-fluid" style="margin-top: 5% ">
       <div class="container-fluid row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-9">
+        {% comment %} <div class="col-sm-1"></div> {% endcomment %}
+        <div class="col-sm-8">
           <div style="  margin-bottom: 10px" class="row">
-            <div class="container px-4" style="margin-top: 10px">
-              <div class="row gx-5">
+            <div class="container" style="margin-top: 10px">
+              <div class="row">
                 <div class="col">
-                  <div class="container px-4 overflow-hidden">
-                    <div class="row gx-5">
-                      <div class="col">
-                       <div class="p-3 border bg-light">Custom column padding</div>
+                  <div class="container overflow-hidden">
+                    <div class="row">
+                      <div class="col-3">
+                       <div class="p-3 border bg-light" style="border-radius: 10px; height: 60px">Custom column padding</div>
                       </div>
-                      <div class="col">
-                        <div class="p-3 border bg-light">Custom column padding</div>
+                      <div class="col-3">
+                        <div class="p-3 border bg-light" style="border-radius: 10px; height: 60px">Custom column padding</div>
                       </div>
                     </div>
                   </div>
@@ -60,7 +60,7 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
                         <table class="col-sm-3 table-striped table-bodered table-hover table-light table-responsive-sm" style="border-collapse: separate; border-spacing: 0">
                             <tr>
                                 <td class="text-center p-5">
-                                    <a href="{% url 'student_detail' student.student_ID %}" class="text-white btn btn-primary">{{ student.student_name }}</a>
+                                    <a href="{% url 'student_detail' student.student_ID %}" class="text-white btn btn-primary" style="font-size: 15px">{{ student.student_name }}</a>
                                 </td>
                             </tr>
                           </table>
@@ -71,19 +71,47 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
 
             </div>
             
-            <div class="input-group" style="margin-top: 30px ; margin-bottom: 50px">
+            {% comment %} <div class="input-group" style="margin-top: 30px ; margin-bottom: 50px">
               <span class="input-group-text"><button href = "" class="text-dark btn">Nhận xét</button></span>
               <textarea class="form-control" aria-label="Nhận xét" style="width:80%; height: 150px"></textarea>
-            </div>
+            </div> {% endcomment %}
         </div>
-        <div class="col-sm-2">
-          <div class="card display-7">
-            <div class="card-body">
-              <p class="text-Blue text-center" style="font-size: 20px">{{ current_time }}</p>
+        <div class="col-sm-4">
+          <div class="card display-5" style="margin-top: 10px">
+            <div class="card-body" style="height: 60px">
+              <p class="text-Blue text-center" style="font-size: 20px; ">{{ current_time }}</p>
+            </div>
+          </div>
+          <div>
+            
+          </div>
+          <div class="input-group" style="margin-top: 20px ; margin-bottom: 20px">
+            <span class="input-group-text justify-content-center" style="width:100%;"><button href = "" class="text-dark btn content font-weight-bold" style="width: 80%">Nhận xét</button></span>
+            <textarea class="form-control" aria-label="Nhận xét" style="width:80%; height: 150px"></textarea>
+          </div>
+
+          <div class="card display-5" style="margin-top: 10px">
+            <div class="card-body row" style="height: 120px">
+              <h5 class="card-title text-center">Đánh giá</h5>
+              <div class="form-check form-check-inline col">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" style=" transform: scale(0.4)">
+                <label class="form-check-label" for="inlineRadio1" style=" font-size: 18px">Tốt</label>
+              </div>
+              <div class="form-check form-check-inline col">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" style=" transform: scale(0.4)">
+                <label class="form-check-label" for="inlineRadio2" style=" font-size: 18px">Khá</label>
+              </div>
+              <div class="form-check form-check-inline col">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" style=" transform: scale(0.4)">
+                <label class="form-check-label" for="inlineRadio3" style=" font-size: 18px">Trung bình</label>
+              </div>
+              <div class="form-check form-check-inline col">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4" style=" transform: scale(0.4)">
+                <label class="form-check-label" for="inlineRadio3" style=" font-size: 18px">Yếu</label>
+              </div>
             </div>
           </div>
         </div>
-
 
       </div>
 
@@ -92,8 +120,11 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
   </div>  
   
 </div>
+    
+{% endblock %}
+
+
       
     
     
-{% endblock %}
 
