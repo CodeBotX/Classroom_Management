@@ -47,23 +47,19 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
             {% comment %} <p class="col-2 display-7  text-white text-center" style="font-size: 30px">{{class}} </p> {% endcomment %}
            
           </div>
-            <div class="card" style="margin-top: 20px; margin-bottom: 10px">
+            <div class="card" style="margin-top: 2%; margin-bottom: 1%">
               <div class="card-body">
                 <h5 class="card-title">Sơ Đồ Lớp</h5>
-                <div class="row row-cols-4" style="margin-top: 20px margin-bottom: 20px">
-          
-                    {% comment %} <thead>
-                        <th class="text-center lead font-weight-bold">Dãy 1</th>
-                    </thead> {% endcomment %}
-                    <tbody>
+                <div class="row row-cols-4" style="margin-top: 2% margin-bottom: 2%">
+                    <tbody >
                         {% for student in Students %}
-                        <table class="col-sm-3 table-striped table-bodered table-hover table-light table-responsive-sm" style="border-collapse: separate; border-spacing: 0">
-                            <tr>
-                                <td class="text-center p-5">
-                                    <a href="{% url 'student_detail' student.student_ID %}" class="text-white btn btn-primary" style="font-size: 15px">{{ student.student_name }}</a>
-                                </td>
-                            </tr>
-                          </table>
+                        <div class="col-sm-3 mb-3">
+                            <div class="card border-primary">
+                                <div class="card-body text-center d-flex align-items-center justify-content-center" style="margin-top: 2%; margin-bottom: 1%">
+                                    <a href="{% url 'student_detail' student.student_ID %}" class="text-white btn btn-primary text-truncate" style="font-size: 1em">{{ student.student_name }}</a>
+                                </div>
+                              </div>
+                          </div>
                         {% endfor %}
                     </tbody>
               </div> 
@@ -71,10 +67,6 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
 
             </div>
             
-            {% comment %} <div class="input-group" style="margin-top: 30px ; margin-bottom: 50px">
-              <span class="input-group-text"><button href = "" class="text-dark btn">Nhận xét</button></span>
-              <textarea class="form-control" aria-label="Nhận xét" style="width:80%; height: 150px"></textarea>
-            </div> {% endcomment %}
         </div>
         <div class="col-sm-4">
           <div class="card display-5" style="margin-top: 10px">

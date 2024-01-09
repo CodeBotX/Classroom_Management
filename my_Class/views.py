@@ -28,7 +28,6 @@ def classroom_view(request):
       'class':classroom,
       'Students' : students,
       'current_time':now,
-      'current_time':now,
   }
   return HttpResponse(template.render(context,request))
 
