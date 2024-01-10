@@ -3,30 +3,84 @@
 
 
 {% block content %}
-<div class="container-fluid row" style="margin-left: 1%; margin-right: 1%">
-    <div class="card col-6 row" style="margin-top: 3%; height: 25rem">
-        <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:100% ">Chọn lớp học</h4>
-        <div class="card-body">
-                <form method="post" class="content" style="margin-top: 50px; width: 80%; margin: 0 auto; padding: 20px; text-align: center;">
-                    {% csrf_token %}     
-                    <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 30px;">
-                        {% for class in classes %} 
-                            <option class="text-center" value="{{ class.class_CODE }}">{{ class.class_CODE }}</option>
-                        {% endfor %}  
-                    </select>
-                    <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 15%; margin-left: auto; margin-right: auto; display: block;">Submit</button>
-                </form>
+<div class="row" style="margin-left: 1%; margin-right: 1%">
+    <div class="col-4" style="padding: 10px; margin-top: 3%">
+        <div class="card" style="height: 25rem;">
+            <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Chọn lớp học</h4>
+            <div class="card-body" style="margin-top: 10%">
+                    <form method="post" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
+                        {% csrf_token %}     
+                        <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
+                            {% for class in classes %} 
+                                <option class="text-center" style="font-size: 1em" value="{{ class.class_CODE }}">{{ class.class_CODE }}</option>
+                            {% endfor %}  
+                        </select>
+                        <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 15%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Submit</button>
+                    </form>
 
-            {% if subjects %}
-                <h2>Môn học trong lớp {{ classes.class_CODE }}:</h2>
-                <ul>
-                    {% for subject in subjects %}
-                        <li>{{ subject.subject_name }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+                {% if subjects %}
+                    <h2>Môn học trong lớp {{ classes.class_CODE }}:</h2>
+                    <ul>
+                        {% for subject in subjects %}
+                            <li>{{ subject.subject_name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
         </div>
-    </div>
-    <div class="col-3"></div>
+    </div>        
+
+    <div class="col-4" style="padding: 10px; margin-top: 3%">
+        <div class="card" style="height: 25rem;">
+            <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Chọn lớp học</h4>
+            <div class="card-body" style="margin-top: 10%">
+                    <form method="post" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
+                        {% csrf_token %}     
+                        <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
+                            {% for class in classes %} 
+                                <option class="text-center" style="font-size: 1em" value="{{ class.class_CODE }}">{{ class.class_CODE }}</option>
+                            {% endfor %}  
+                        </select>
+                        <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 15%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Submit</button>
+                    </form>
+
+                {% if subjects %}
+                    <h2>Môn học trong lớp {{ classes.class_CODE }}:</h2>
+                    <ul>
+                        {% for subject in subjects %}
+                            <li>{{ subject.subject_name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>        
+
+    <div class="col-4" style="padding: 10px; margin-top: 3%">
+        <div class="card" style="height: 25rem;">
+            <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Chọn lớp học</h4>
+            <div class="card-body" style="margin-top: 10%">
+                    <form method="post" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
+                        {% csrf_token %}     
+                        <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
+                            {% for class in classes %} 
+                                <option class="text-center" style="font-size: 1em" value="{{ class.class_CODE }}">{{ class.class_CODE }}</option>
+                            {% endfor %}  
+                        </select>
+                        <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 15%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Submit</button>
+                    </form>
+
+                {% if subjects %}
+                    <h2>Môn học trong lớp {{ classes.class_CODE }}:</h2>
+                    <ul>
+                        {% for subject in subjects %}
+                            <li>{{ subject.subject_name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>        
+
 </div>   
 {% endblock content %}

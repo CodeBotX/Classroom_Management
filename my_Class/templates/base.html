@@ -43,50 +43,29 @@ tạo các block tĩnh, và block để các file khác kế thừa
       
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <a class="navbar-brand text-white font-weight-bold nav-link active" aria-current="page" style="font-size: 200%" href="/home" >Class 4.0</a>
-            <li class="nav-item dropdown" style="height: 100%;
-              line-height: 100%;
-              display: flex;
-              align-items: center;
-              justify-content: center;">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; ">
-                Dropdown
-              </a>
+          <div class="col-sm-9"></div> 
+          <div class="col-sm-2 row">
+              {% if user.username %}
 
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>  
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div class="col-sm-6">
+                    <p class="text-white text-center" style="height: 100%;
+                    line-height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;">{{user.username}}</p>
+                </div>
+                <div class="col-sm-6">    
+                    <li class="nav-item">
+                      <a href="{% url 'logout' %}" class="nav-link btn btn-primary text-white">Logout</a>
+                    </li>
+                </div>  
               
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Subject</a>
-              </li>
-            </ul>
-            <div class="col-sm-2">
-                {% if user.username %}
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <div class="col-sm-6">
-                      <p class="text-white text-center" style="height: 100%;
-                      line-height: 100%;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;">{{user.username}}</p>
-                  </div>
-                  <div class="col-sm-6">    
-                      <li class="nav-item">
-                        <a href="{% url 'logout' %}" class="nav-link btn btn-primary text-white">Logout</a>
-                      </li>
-                  </div>  
-                
-                </ul>
-                {% else %}
-                  <a href = "/home" class="text-white btn btn-primary">Home</a>
-                {% endif %}
-            </div>
+              </ul>
+              {% else %}
+                <a href = "/home" class="text-white btn btn-primary">Home</a>
+              {% endif %}
+          </div>
         </div>
         
     </div>
