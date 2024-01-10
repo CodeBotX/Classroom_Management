@@ -3,10 +3,9 @@
 
 
 {% block content %}
-<div class="container-fluid row">
-    <div class="col-3"></div>
-    <div class="card col-6 row" style="margin-top: 10%; height: 25rem">
-        <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:30px ">Chọn lớp học</h4>
+<div class="container-fluid row" style="margin-left: 1%; margin-right: 1%">
+    <div class="card col-6 row" style="margin-top: 3%; height: 25rem">
+        <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:100% ">Chọn lớp học</h4>
         <div class="card-body">
                 <form method="post" class="content" style="margin-top: 50px; width: 80%; margin: 0 auto; padding: 20px; text-align: center;">
                     {% csrf_token %}     
@@ -29,5 +28,5 @@
         </div>
     </div>
     <div class="col-3"></div>
-</div>    
+</div>   
 {% endblock content %}
