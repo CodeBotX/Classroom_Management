@@ -3,81 +3,74 @@
 
 
 {% block content %}
+<!-- option.html -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.class_code').change(function() {
+        var url = "{% url 'option' %}";
+        var class_code = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'class_code': class_code
+            },
+            success: function(data) {
+                var select = $('.subject_code');
+                select.empty();
+                $.each(data, function(index, value) {
+                    select.append('<option value="' + value.subject_CODE + '">' + value.subject_name + '</option>');
+                });
+            }
+        });
+    });
+});
+</script>
 <div class="row" style="margin-left: 1%; margin-right: 1%">
+    {% comment %} Block Chọn Lớp Học {% endcomment %}
     <div class="col-4" style="padding: 10px; margin-top: 3%">
         <div class="card" style="height: 25rem;">
-            <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Chọn lớp học</h4>
+            <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Classroom</h4>
             <div class="card-body" style="margin-top: 10%">
-                    <form method="post" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
-                        {% csrf_token %}     
-                        <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
-                            {% for class in classes %} 
-                                <option class="text-center" style="font-size: 1em" value="{{ class.class_CODE }}">{{ class.class_CODE }}</option>
-                            {% endfor %}  
-                        </select>
-                        <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 15%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Submit</button>
-                    </form>
-
-                {% if subjects %}
-                    <h2>Môn học trong lớp {{ classes.class_CODE }}:</h2>
-                    <ul>
-                        {% for subject in subjects %}
-                            <li>{{ subject.subject_name }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+                <form method="post" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
+                    {% csrf_token %}     
+                    <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
+                        {% for class in classes %} 
+                            <option class="text-center" style="font-size: 1em" value="{{ class.class_CODE }}">{{ class.class_CODE }}</option>
+                        {% endfor %}  
+                    </select>
+                  
+                </form>
             </div>
         </div>
     </div>        
-
+    {% comment %} Block chọn môn học {% endcomment %}
     <div class="col-4" style="padding: 10px; margin-top: 3%">
         <div class="card" style="height: 25rem;">
-            <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Chọn lớp học</h4>
+            <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Subject</h4>
             <div class="card-body" style="margin-top: 10%">
-                    <form method="post" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
-                        {% csrf_token %}     
-                        <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
-                            {% for class in classes %} 
-                                <option class="text-center" style="font-size: 1em" value="{{ class.class_CODE }}">{{ class.class_CODE }}</option>
-                            {% endfor %}  
-                        </select>
-                        <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 15%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Submit</button>
-                    </form>
+                <form method="post"class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
+                    {% csrf_token %}     
+                    <select class="form-select subject_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                    <br>
+                    <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 35%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Submit</button>
+                </form>
 
-                {% if subjects %}
-                    <h2>Môn học trong lớp {{ classes.class_CODE }}:</h2>
-                    <ul>
-                        {% for subject in subjects %}
-                            <li>{{ subject.subject_name }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
             </div>
         </div>
     </div>        
-
+    {% comment %} Week_summary {% endcomment %}
     <div class="col-4" style="padding: 10px; margin-top: 3%">
         <div class="card" style="height: 25rem;">
-            <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Chọn lớp học</h4>
+            <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Week_Summary</h4>
             <div class="card-body" style="margin-top: 10%">
-                    <form method="post" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
+                    <form method="post" action="{% url 'reviewweekend' %}" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
                         {% csrf_token %}     
-                        <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
-                            {% for class in classes %} 
-                                <option class="text-center" style="font-size: 1em" value="{{ class.class_CODE }}">{{ class.class_CODE }}</option>
-                            {% endfor %}  
-                        </select>
-                        <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 15%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Submit</button>
+                        
+                        <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 50%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Go to page</button>
                     </form>
-
-                {% if subjects %}
-                    <h2>Môn học trong lớp {{ classes.class_CODE }}:</h2>
-                    <ul>
-                        {% for subject in subjects %}
-                            <li>{{ subject.subject_name }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
             </div>
         </div>
     </div>        
