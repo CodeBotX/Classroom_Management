@@ -3,6 +3,7 @@ from django import forms
 import re 
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from .models import *
 
 class RegistrationForm(forms.Form):
     username = forms.CharField(label='Tài Khoản', max_length=50)
@@ -64,3 +65,4 @@ class CustomLoginForm(AuthenticationForm):
             }
         )
     )
+
