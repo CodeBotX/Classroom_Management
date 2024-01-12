@@ -96,9 +96,6 @@ def week_summary_view(request):
   }
   return HttpResponse(template.render(context,request))
 
-from django.shortcuts import render, redirect
-from .models import Class
-
 
 
 # def option_view(request):
@@ -114,33 +111,33 @@ from .models import Class
 def option_view(request):
   classes = Class.objects.all()
   subjects = None
-  if request.method == 'POST':
-    class_code = request.POST.get('class_code')
-    subject_code = request.POST.get('subject_code')
-    request.session['class_code'] = class_code
-    request.session['subject_code'] = subject_code
-    return redirect('Classroom')  # Redirect to the classroom view
-  elif 'class_code' in request.GET:
-    class_code = request.GET.get('class_code')
-    try:
-        classroom = Class.objects.get(class_CODE=class_code)
-        subjects = list(classroom.subjects.values())
-    except Class.DoesNotExist:
-        pass
-  if subjects is not None:
-    return JsonResponse(subjects, safe=False)
-  else:
-    return render(request, 'option.html', {'classes': classes})
-  # if 'class_code' in request.GET:
-  #     class_code = request.GET.get('class_code')
-  #     subject_code = request.GET.get('subject_code',None)
-  #     try:
+  # if request.method == 'POST':
+  #   class_code = request.POST.get('class_code')
+  #   subject_code = request.POST.get('subject_code')
+  #   request.session['class_code'] = class_code
+  #   request.session['subject_code'] = subject_code
+  #   return redirect('Classroom')  # Redirect to the classroom view
+  # elif 'class_code' in request.GET:
+  #   class_code = request.GET.get('class_code')
+  #   try:
   #       classroom = Class.objects.get(class_CODE=class_code)
   #       subjects = list(classroom.subjects.values())
-  #       request.session['class_code'] = class_code
-  #     except Class.DoesNotExist:
+  #   except Class.DoesNotExist:
   #       pass
   # if subjects is not None:
-  #     return JsonResponse(subjects, safe=False)
+  #   return JsonResponse(subjects, safe=False)
   # else:
-  #     return render(request, 'option.html', {'classes': classes})
+  #   return render(request, 'option.html', {'classes': classes})
+  if 'class_code' in request.GET:
+      class_code = request.GET.get('class_code')
+      subject_code = request.GET.get('subject_code',None)
+      try:
+        classroom = Class.objects.get(class_CODE=class_code)
+        subjects = list(classroom.subjects.values())
+        request.session['class_code'] = class_code
+      except Class.DoesNotExist:
+        pass
+  if subjects is not None:
+      return JsonResponse(subjects, safe=False)
+  else:
+      return render(request, 'option.html', {'classes': classes})
