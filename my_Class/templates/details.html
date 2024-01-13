@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Details{% endblock title %}
 
 {% comment %}
@@ -8,15 +9,100 @@ File deatails dùng để hiển thị chi tiết thông tin của học sinh kh
 {% endcomment %}
 
 {% block content %}
-<h1>Thông tin học sinh</h1>
-<p>ID: {{ student.student_ID }}</p>
-<p>Tên: {{ student.student_name }}</p>
-<p>Lớp: {{ student.classroom }}</p>
-<h2>Điểm</h2>
-{% for score in scores %}
-<p>Môn: {{ score.subject }}</p>
-<p>Điểm K1: {{ score.K1_score }}</p>
-<p>Điểm K2: {{ score.K2_score }}</p>
-<p>Điểm K3: {{ score.K3_score }}</p>
-{% endfor %}
+<div class="row"> 
+    <div class="col-1"></div>
+    <div class="col-2">
+        <img src="{% static "illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" %}" class="img-thumbnail" alt="...">
+    </div>
+
+    <div class="col-8">
+        <div class="card">
+            <h3 class="card-title text-center">Thông tin học sinh</h3>
+            <div class="card-body">   
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="display-6 font-weight-bold" style="font-size: 1.2em" scope="row">ID</th>
+                        <td class="display-6 font-weight-bold" style="font-size: 1.2em">{{ student.student_ID }}</td>
+                    </tr>
+                    <tr>
+                        <th class="display-6 font-weight-bold" style="font-size: 1.2em" scope="row">Tên</th>
+                        <td class="display-6 font-weight-bold" style="font-size: 1.2em">{{ student.student_name }}</td>
+                    </tr>
+                    <tr>
+                        <th class="display-6 font-weight-bold" style="font-size: 1.2em" scope="row">Lớp</th>
+                        <td class="display-6 font-weight-bold" style="font-size: 1.2em">{{ student.classroom }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>    
+        </div>
+    </div> 
+    <div class="col-1"></div>   
+</div>
+
+<div class="row" style="margin-top: 1%">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <div class="card" style="background-color: #07478D">
+            <div class="card-body row">
+                <div class="col-7">
+                    <h2 class="card-title text-white" style="margin-top: 2%;">Điểm</h2>
+                    {% for score in scores %}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">{{ score.subject }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Điểm K1</th>
+                            <td>{{ score.K1_score }}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Điểm K2</th>
+                            <td>{{ score.K2_score }}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Điểm K3</th>
+                            <td>{{ score.K3_score }}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    {% endfor %}
+                </div>
+                
+                <div class="col-5">
+                    <h2 class="card-title text-white text-center" style="margin-top: 2%;">Chấm điểm</h2>
+                    <div class="row" style="margin-top:5%">
+                        <div class="col-1"></div>
+                        <div class="col-4">
+                            <form method="post" class="content" style=" width: 100%; margin: 0 auto; text-align: center;">     
+                                <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
+                                        <option class="text-center" style="font-size: 1em" value="">Loại điểm</option>
+                                </select>
+                            
+                            </form>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Nhập điểm</span>
+                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                        </div> 
+                        <div class="col-1"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.0); width:30%; margin-top: 3%; margin-left: auto; margin-right: auto; display: block; font-size: 1em">Submit</button>
+                </div>
+
+            </div>
+        </div>
+    </div> 
+    <div class="col-1"></div>   
+</div>    
 {% endblock content %}
