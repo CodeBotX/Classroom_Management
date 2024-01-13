@@ -76,15 +76,19 @@ File deatails dùng để hiển thị chi tiết thông tin của học sinh kh
                     </table>
                     {% endfor %}
                 </div>
-                
+                {% comment %} Chấm điểm  {% endcomment %}
                 <div class="col-5">
                     <h2 class="card-title text-white text-center" style="margin-top: 2%;">Chấm điểm</h2>
                     <div class="row" style="margin-top:5%">
                         <div class="col-1"></div>
                         <div class="col-4">
-                            <form method="post" class="content" style=" width: 100%; margin: 0 auto; text-align: center;">     
-                                <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
+                            <form method="POST" class="content" style=" width: 100%; margin: 0 auto; text-align: center;"> 
+                                {% csrf_token %}    
+                                <select name="score_type" class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
                                         <option class="text-center" style="font-size: 1em" value="">Loại điểm</option>
+                                        <option class="text-center" style="font-size: 1em" value="K1_score">K1_score</option>
+                                        <option class="text-center" style="font-size: 1em" value="K2_score">K2_score</option>
+                                        <option class="text-center" style="font-size: 1em" value="K3_score">K3_score</option>
                                 </select>
                             
                             </form>
@@ -92,17 +96,55 @@ File deatails dùng để hiển thị chi tiết thông tin của học sinh kh
                         <div class="col-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Nhập điểm</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <input name="score_value" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                         </div> 
                         <div class="col-1"></div>
                     </div>
                     <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.0); width:30%; margin-top: 3%; margin-left: auto; margin-right: auto; display: block; font-size: 1em">Submit</button>
-                </div>
+                </div> 
+                 {% comment %} <form method="post" class="content" style=" width: 100%; margin: 0 auto; text-align: center;">
+                    {% csrf_token %}
+                    <select name="score_type" class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
+                        <option class="text-center" style="font-size: 1em" value="">Loại điểm</option>
+                        <option class="text-center" style="font-size: 1em" value="K1_score">K1_score</option>
+                        <option class="text-center" style="font-size: 1em" value="K2_score">K2_score</option>
+                        <option class="text-center" style="font-size: 1em" value="K3_score">K3_score</option>
+                    </select>
+                    <input type="text" name="score_value" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.0); width:30%; margin-top: 3%; margin-left: auto; margin-right: auto; display: block; font-size: 1em">Submit</button>
+                </form>  {% endcomment %}
 
             </div>
         </div>
     </div> 
     <div class="col-1"></div>   
-</div>    
+</div>   
+<br>
+<br>
+<div class="card">
+    <div class="card-body">
+        <form method="post" action="">
+        {% comment %} <form method="post" action="/}"> {% endcomment %}
+            {% csrf_token %}
+            {% comment %} <label>Student:</label>
+  {{ form.student.student_name }}
+  <br/>
+  <label for="{{ form.subject.id_for_label }}">Subject:</label>
+  {{ form.subject.subject_name }}
+  <br/>
+  <label for="{{ form.K1_score.id_for_label }}">K1 Score:</label>
+  {{ form.K1_score }}
+  <br/>
+  <label for="{{ form.K2_score.id_for_label }}">K2_score:</label>
+  {{ form.K2_score }}
+  <br/>
+  <label for="{{ form.K3_score.id_for_label }}">K3_score:</label>
+  {{ form.K3_score }}
+  <br/> {% endcomment %}
+  {{form.as_p}}
+            <button type="submit">Add Score</button>
+          </form> 
+    </div>
+</div>
 {% endblock content %}

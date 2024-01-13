@@ -80,3 +80,5 @@ class LessonReview(models.Model):
 
     def __str__(self):
         return f"{self.lesson.subject.subject_name} - Review ID: {self.pk} - Rating: {self.rating}"
+
+

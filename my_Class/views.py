@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import *
-# from .forms import RegistrationForm
+from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
@@ -59,14 +59,28 @@ def register_view (request):
   return HttpResponse(template.render(context,request))
 
 def student_detail(request, student_ID):
+  # print(student_ID)
   student = get_object_or_404(Student, pk=student_ID)
+  # print(student)
   scores = Score.objects.filter(student=student)
+  subject = get_object_or_404(Subject, subject_CODE=request.session.get('subject_code'))
   template = loader.get_template('details.html')
+  if request.method == 'POST':
+        form = ScoreForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_score')
+  else:
+        form = ScoreForm(initial = {'student': student, 'subject': subject})
+  # form['student'] = student
+  # print(form)
   context = {
     'student': student,
-    'scores': scores
+    'scores': scores,
+    'form':form
   }
   return HttpResponse(template.render(context,request))
+
 
 
   
@@ -117,9 +131,92 @@ def option_view(request):
         classroom = Class.objects.get(class_CODE=class_code)
         subjects = list(classroom.subjects.values())
         request.session['class_code'] = class_code
+        
       except Class.DoesNotExist:
         pass
       return JsonResponse(subjects, safe=False)
   else:
       return render(request, 'option.html', {'classes': classes})
-  # create new lession
+
+
+def create_lesson_view(request):
+    if request.method == 'GET':
+        subject_code = request.GET.get('subject_code')
+        if subject_code:
+            try:
+                # Lấy thông tin từ session và request
+                teacher_username = request.session.get('username')
+                class_code = request.session.get('class_code')
+
+                # Lấy đối tượng từ cơ sở dữ liệu
+                teacher = Teacher.objects.get(username=teacher_username)
+                classroom = Class.objects.get(class_CODE=class_code)
+                subject = Subject.objects.get(subject_CODE=subject_code)
+
+                # Tạo một Lesson mới
+                lesson = Lessons(classroom=classroom, subject=subject, teacher=teacher, schedule_time=timezone.now())
+                lesson.save()
+
+                return HttpResponse('Lesson created successfully')
+            except (Teacher.DoesNotExist, Class.DoesNotExist, Subject.DoesNotExist):
+                return HttpResponse('Failed to create lesson: invalid data')
+        else:
+            return HttpResponse('Failed to create lesson: no subject_code provided')
+    else:
+        return HttpResponse('Invalid request method')
+      
+
+
+# input điểm 
+def save_score(request):
+    # Lấy student từ GET
+    student_id = request.GET.get('student_id')
+    student = get_object_or_404(Student, Student_ID=student_id)
+
+    # Lấy subject từ session
+    subject_id = request.session.get('subject_id')
+    print(subject_id)
+    print(student_id)
+    subject = get_object_or_404(Subject, id=subject_id)
+
+    # Kiểm tra xem request có phải là POST không
+    if request.method == 'POST':
+        # Lấy điểm từ form
+        score_type = request.POST.get('score_type')
+        print(score_type)
+        score_value = request.POST.get('score_value')
+
+        # Tạo mới hoặc cập nhật điểm
+        score, created = Score.objects.update_or_create(
+        student=student,
+        subject=subject,
+        defaults={score_type: score_value},
+      )
+
+        # Kiểm tra và lưu điểm
+        try:
+            score.save()
+        except ValidationError as e:
+            # Xử lý lỗi nếu có
+            pass
+
+    # Render template
+    return render(request, 'details.html')
+  
+
+def test (request):
+  form=ScoreForm()
+  template = loader.get_template('test.html')
+  if request.method == 'POST':
+        form = ScoreForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('test')
+  else:
+        form = ScoreForm()
+  form.student = get_object_or_404(Student, pk=23000)
+  context = {
+    'form': form
+  }
+  return HttpResponse(template.render(context,request))
+  
