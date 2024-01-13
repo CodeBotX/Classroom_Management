@@ -66,3 +66,9 @@ class CustomLoginForm(AuthenticationForm):
         )
     )
 
+
+class LessonsForm(forms.ModelForm):
+    class Meta:
+        model = Lessons
+        fields = ['classroom', 'subject', 'teacher', 'schedule_time']
+

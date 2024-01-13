@@ -33,7 +33,7 @@ $(document).ready(function() {
     <div class="col-6" style="padding: 10px; margin-top: 5%">
         <div class="card" style="height: 30rem;">
             <div style="margin-top: 4%;margin-bottom :3% ; height:30%">
-                <h4 class="card-title text-center font-weight-bold" style="margin-top: 0%; font-size:180%; margin-bottom: 5% ">Classroom</h4>
+                <h4 class="card-title text-center font-weight-bold" style="margin-top: 0%; font-size:180%; margin-bottom: 5% ">Lớp học</h4>
                 <form method="GET" name ="class_code" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
                     {% csrf_token %}     
                     <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1.3em;">
@@ -48,23 +48,23 @@ $(document).ready(function() {
             <div class="row">
                 <div class="col-6" style="border-right: 1px solid #000; ">
                     <div>{% comment %} Block chọn môn học {% endcomment %}
-                        <h4 class="card-title text-center" style="margin-top: 0%;margin-bottom: 7%; font-size:150% ">Subject</h4>
+                        <h4 class="card-title text-center" style="margin-top: 0%;margin-bottom: 7%; font-size:150% ">Môn học</h4>
                         <form method="GET" action="{% url 'Classroom' %}"  class="content" style=" width: 80%; margin: 0 auto; text-align: center;">
                             {% csrf_token %}     
                             <select class="form-select subject_code" name="subject_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
                                 <!-- Options will be populated by JavaScript -->
                             </select>
                             <br>
-                            <button type="submit" name ="submit_class_subject" class="btn btn-primary" value="Submit" style="transform: scale(1.2); width:40%; margin-top: 3%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Teaching</button>
+                            <button type="submit" name ="submit_class_subject" class="btn btn-primary" value="Submit" style="transform: scale(1.2); width:40%; margin-top: 3%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Dạy học</button>
                         </form>
 
                     </div>
                 </div>
                 <div class="col-6">{% comment %} Week_summary {% endcomment %}
-                    <h4 class="card-title text-center" style="margin-top: 0%;margin-bottom: 10%; font-size:150% ">Week summary</h4>
+                    <h4 class="card-title text-center" style="margin-top: 0%;margin-bottom: 10%; font-size:150% ">Tổng kết tuần</h4>
                     <form method="post" action="{% url 'reviewweekend' %}" class="content" style=" width: 100%; margin: 0 auto; text-align: center;">
                         {% csrf_token %}     
-                        <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:66%; margin-top: 20%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Cum in</button>
+                        <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:66%; margin-top: 17%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Bảng tổng kết</button>
                     </form>
                 </div>    
             </div>

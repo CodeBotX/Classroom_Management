@@ -11,6 +11,7 @@ from .forms import *
 from django.contrib.auth.views import LoginView
 from django.http import JsonResponse
 
+
 # from django.http import HttpResponseRedirect
 
 # Create your views here.
@@ -94,8 +95,6 @@ def student_grade_view(request, student_ID):
   }
   return HttpResponse(template.render(context,request))
 
-# student_grade/<int:student_ID>
-# student_grade/<int:student_ID>
 
 def week_summary_view(request):
   reviews = LessonReview.objects.all()  # Lấy tất cả đánh giá
@@ -107,18 +106,20 @@ def week_summary_view(request):
 
   
 def option_view(request):
+  # xử lí select class and subject
   classes = Class.objects.all()
   subjects = None
   if 'class_code' in request.GET:
-        class_code = request.GET.get('class_code')
-        # subject_code = request.GET.get('subject_code',None)
-        # print()
-        try:
-          classroom = Class.objects.get(class_CODE=class_code)
-          subjects = list(classroom.subjects.values())
-          request.session['class_code'] = class_code
-        except Class.DoesNotExist:
-          pass
-        return JsonResponse(subjects, safe=False)
+      class_code = request.GET.get('class_code')
+      # subject_code = request.GET.get('subject_code',None)
+      # print()
+      try:
+        classroom = Class.objects.get(class_CODE=class_code)
+        subjects = list(classroom.subjects.values())
+        request.session['class_code'] = class_code
+      except Class.DoesNotExist:
+        pass
+      return JsonResponse(subjects, safe=False)
   else:
-        return render(request, 'option.html', {'classes': classes})
+      return render(request, 'option.html', {'classes': classes})
+  # create new lession

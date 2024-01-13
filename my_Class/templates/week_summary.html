@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Student_grade{% endblock title %}
 
 {% comment %}
@@ -7,11 +8,59 @@
 {% endcomment %}
 
 {% block content %}
-{% for review in week_review %}
-    <div>
-        <h2>{{ review.lesson.subject.subject_name }}</h2>
-        <p>{{ review.review }}</p>
-        <p>Xếp loại: {{ review.get_rating_display }}</p>
+    <div class="row"> 
+        <div class="col-1"></div>
+    
+        <div class="col-10">
+            <div class="card">
+                <h3 class="card-title text-center">Thông tin lớp</h3>
+                <div class="card-body">   
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th class="display-6 font-weight-bold" style="font-size: 1.2em" scope="row">ID</th>
+                            <td class="display-6 font-weight-bold" style="font-size: 1.2em"></td>
+                        </tr>
+                        <tr>
+                            <th class="display-6 font-weight-bold" style="font-size: 1.2em" scope="row">Lớp</th>
+                            <td class="display-6 font-weight-bold" style="font-size: 1.2em">{{ class.class_CODE }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>    
+            </div>
+        </div> 
+        <div class="col-1"></div>   
     </div>
-{% endfor %}
+    
+    <div class="row" style="margin-top: 1%">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="card" style="background-color: #07478D">
+                <div class="card-body">
+                    <h2 class="card-title text-white" style="margin-top: 2%;">Tổng kết tuần</h2>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Môn</th>
+                            <th scope="col">Nhận xét</th>
+                            <th scope="col">Xếp loại</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for review in week_review %}
+                        <tr>
+                            <th scope="row">{{ review.lesson.subject.subject_name }}</th>
+                            <td>{{ review.review }}</td>
+                            <td>{{ review.get_rating_display }}</td>
+                        </tr>
+                        {% endfor %}
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> 
+        <div class="col-1"></div>   
+    </div>
 {% endblock content %}
