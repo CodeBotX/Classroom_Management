@@ -117,9 +117,6 @@ def option_view(request):
           classroom = Class.objects.get(class_CODE=class_code)
           subjects = list(classroom.subjects.values())
           request.session['class_code'] = class_code
-          # if 'subject_code' in request.GET:
-          #       subject_code = request.GET.get('subject_code')
-          #       request.session['subject_code'] = subject_code
         except Class.DoesNotExist:
           pass
         return JsonResponse(subjects, safe=False)
