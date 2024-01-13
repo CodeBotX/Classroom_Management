@@ -12,6 +12,7 @@ $(document).ready(function() {
         var class_code = $(this).val();
         $.ajax({
             url: url,
+            type: 'GET',
             data: {
                 'class_code': class_code
             },
@@ -32,7 +33,7 @@ $(document).ready(function() {
         <div class="card" style="height: 25rem;">
             <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Classroom</h4>
             <div class="card-body" style="margin-top: 10%">
-                <form method="post" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
+                <form method="GET" name ="class_code" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
                     {% csrf_token %}     
                     <select class="form-select class_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
                         {% for class in classes %} 
@@ -49,13 +50,13 @@ $(document).ready(function() {
         <div class="card" style="height: 25rem;">
             <h4 class="card-title text-center font-weight-bold" style="margin-top: 5%; font-size:150% ">Subject</h4>
             <div class="card-body" style="margin-top: 10%">
-                <form method="post" action="{% url 'Classroom' %}"  class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
+                <form method="GET" action="{% url 'Classroom' %}"  class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
                     {% csrf_token %}     
-                    <select class="form-select subject_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
+                    <select class="form-select subject_code" name="subject_code" aria-label="Default select example" style="width: 100%; font-size: 1em;">
                         <!-- Options will be populated by JavaScript -->
                     </select>
                     <br>
-                    <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 35%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Submit</button>
+                    <button type="submit" name ="submit_class_subject" class="btn btn-primary" value="Submit" style="transform: scale(1.2); width:40%; margin-top: 35%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Submit</button>
                 </form>
 
             </div>
@@ -68,7 +69,6 @@ $(document).ready(function() {
             <div class="card-body" style="margin-top: 10%">
                     <form method="post" action="{% url 'reviewweekend' %}" class="content" style=" width: 90%; margin: 0 auto; text-align: center;">
                         {% csrf_token %}     
-                        
                         <button type="submit" class="btn btn-primary" value="Chọn" style="transform: scale(1.2); width:40%; margin-top: 50%; margin-left: auto; margin-right: auto; display: block; font-size: 1.1em">Go to page</button>
                     </form>
             </div>
