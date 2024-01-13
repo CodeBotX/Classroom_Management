@@ -103,6 +103,7 @@ admin.site.register(Subject,Subject_Admin)
 admin.site.register(Teacher,Teacher_Admin)
 admin.site.register(Class,Class_Admin)
 admin.site.register(Student,Student_Admin)
+
 admin.site.register(Score,Score_Admin)
 admin.site.register(Lessons,Lessons_Admin)
 admin.site.register(LessonReview,LessonReview_Admin)
