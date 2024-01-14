@@ -12,9 +12,7 @@ from django.contrib.auth.views import LoginView
 from django.http import JsonResponse
 
 
-# from django.http import HttpResponseRedirect
 
-# Create your views here.
 
 
 classroom = Class.objects.get(class_CODE='6A')
@@ -59,25 +57,34 @@ def register_view (request):
   return HttpResponse(template.render(context,request))
 
 def student_detail(request, student_ID):
-  # print(student_ID)
+  # lấy student, lưu vào session
   student = get_object_or_404(Student, pk=student_ID)
-  # print(student)
-  scores = Score.objects.filter(student=student)
-  subject = get_object_or_404(Subject, subject_CODE=request.session.get('subject_code'))
-  template = loader.get_template('details.html')
+  request.session['student_ID'] = student_ID
+  # Lấy subject_code từ session
+  subject_code = request.session.get('subject_code')
+  subject = get_object_or_404(Subject,pk=subject_code)
+  # Hiển thị bảng điểm
+  scores = Score.objects.filter(student=student,subject =subject_code)
+  my_student = Student.objects.get(student_ID=request.session['student_ID'])
+  my_subject = Subject.objects.get(subject_CODE=request.session['subject_code'])
+  print(my_student)
+  print(subject)
   if request.method == 'POST':
-        form = ScoreForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('add_score')
+      form = ScoreForm(request.POST)
+      if form.is_valid():
+        try:
+          score = form.save(commit=False)
+          score.student = my_student
+          return redirect('student_detail')  # replace with your success url
+        except Exception as e:
+          print(f"An error occurred: {e}")
   else:
-        form = ScoreForm(initial = {'student': student, 'subject': subject})
-  # form['student'] = student
-  # print(form)
+        form = ScoreForm()
+  template = loader.get_template('details.html')
   context = {
     'student': student,
     'scores': scores,
-    'form':form
+    'form': form
   }
   return HttpResponse(template.render(context,request))
 
@@ -124,19 +131,16 @@ def option_view(request):
   classes = Class.objects.all()
   subjects = None
   if 'class_code' in request.GET:
-      class_code = request.GET.get('class_code')
-      # subject_code = request.GET.get('subject_code',None)
-      # print()
-      try:
-        classroom = Class.objects.get(class_CODE=class_code)
-        subjects = list(classroom.subjects.values())
-        request.session['class_code'] = class_code
-        
-      except Class.DoesNotExist:
-        pass
-      return JsonResponse(subjects, safe=False)
+    class_code = request.GET.get('class_code')
+    try:
+      classroom = Class.objects.get(class_CODE=class_code)
+      subjects = list(classroom.subjects.values())
+      request.session['class_code'] = class_code  
+    except Class.DoesNotExist:
+      pass
+    return JsonResponse(subjects, safe=False)
   else:
-      return render(request, 'option.html', {'classes': classes})
+    return render(request, 'option.html', {'classes': classes})
 
 
 def create_lesson_view(request):
@@ -168,43 +172,38 @@ def create_lesson_view(request):
 
 
 # input điểm 
-def save_score(request):
-    # Lấy student từ GET
-    student_id = request.GET.get('student_id')
-    student = get_object_or_404(Student, Student_ID=student_id)
+# def save_score(request):
+#   # Lấy student từ GET
+#   student_id = request.GET.get('student_id')
+#   get_student = get_object_or_404(Student, Student_ID=student_id)
+#   # Lấy subject từ session
+#   subject_id = request.session.get('subject_id')
+#   get_subject = get_object_or_404(Subject, id=subject_id)
 
-    # Lấy subject từ session
-    subject_id = request.session.get('subject_id')
-    print(subject_id)
-    print(student_id)
-    subject = get_object_or_404(Subject, id=subject_id)
+#   # Kiểm tra xem request có phải là POST không
+#   if request.method == 'POST':
+#       # Lấy điểm từ form
+#       score_type = request.POST.get('score_type')
+#       print(score_type)
+#       score_value = request.POST.get('score_value')
 
-    # Kiểm tra xem request có phải là POST không
-    if request.method == 'POST':
-        # Lấy điểm từ form
-        score_type = request.POST.get('score_type')
-        print(score_type)
-        score_value = request.POST.get('score_value')
-
-        # Tạo mới hoặc cập nhật điểm
-        score, created = Score.objects.update_or_create(
-        student=student,
-        subject=subject,
-        defaults={score_type: score_value},
-      )
-
-        # Kiểm tra và lưu điểm
-        try:
-            score.save()
-        except ValidationError as e:
-            # Xử lý lỗi nếu có
-            pass
-
-    # Render template
-    return render(request, 'details.html')
+#       # Tạo mới hoặc cập nhật điểm
+#       score, created = Score.objects.update_or_create(
+#       student=get_student,
+#       subject=get_subject,
+#       defaults={score_type: score_value},
+#     )
+#       # Kiểm tra và lưu điểm
+#       try:
+#           score.save()
+#       except ValidationError as e:
+#           # Xử lý lỗi nếu có
+#           pass
+#   # Render template
+#   return render(request, 'details.html')
   
 
-def test (request):
+def test_saveScore (request):
   form=ScoreForm()
   template = loader.get_template('test.html')
   if request.method == 'POST':
@@ -214,9 +213,29 @@ def test (request):
             return redirect('test')
   else:
         form = ScoreForm()
-  form.student = get_object_or_404(Student, pk=23000)
+ 
   context = {
     'form': form
   }
   return HttpResponse(template.render(context,request))
-  
+
+
+# input điểm 
+def save_score(request):
+  template = loader.get_template('details.html')
+  student_id = request.session.get('student_ID')
+  get_student = get_object_or_404(Student, Student_ID=student_id)
+  subject_id = request.session.get('subject_id')
+  get_subject = get_object_or_404(Subject, id=subject_id)
+  # Kiểm tra xem request có phải là POST không
+  if request.method == 'POST':
+    form = ScoreForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('test')
+  else:
+    form = ScoreForm()
+  context = {
+    'form': form
+  }
+  return HttpResponse(template.render(context,request))

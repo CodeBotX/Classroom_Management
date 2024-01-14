@@ -76,4 +76,4 @@ class LessonsForm(forms.ModelForm):
 class ScoreForm(forms.ModelForm):
     class Meta:
         model = Score
-        fields = ['student', 'subject', 'K1_score', 'K2_score', 'K3_score']
+        fields = ['student','subject','K1_score', 'K2_score', 'K3_score']

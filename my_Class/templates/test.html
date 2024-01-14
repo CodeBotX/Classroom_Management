@@ -6,24 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="post" action="{% url 'test' %}">
+    <form method="post">
         {% csrf_token %}
-        <label for="{{ form.student.id_for_label }}">Student:</label>
-  {{ form.student }}
-  <br/>
-  <label for="{{ form.subject.id_for_label }}">Subject:</label>
-  {{ form.subject }}
-  <br/>
-  <label for="{{ form.K1_score.id_for_label }}">K1 Score:</label>
-  {{ form.K1_score }}
-  <br/>
-  <label for="{{ form.K2_score.id_for_label }}">K2_score:</label>
-  {{ form.K2_score }}
-  <br/>
-  <label for="{{ form.K3_score.id_for_label }}">K3_score:</label>
-  {{ form.K3_score }}
-  <br/>
-        <button type="submit">Add Score</button>
-      </form>
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
