@@ -69,7 +69,7 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
           <div class="col-12">
             <button type="submit" class="btn text-white font-weight-bold" value="Chọn" style="transform: scale(0.9); width:50%;margin-left: auto; margin-right: auto; display: block; font-size: 0.5em; border-radius: 10px; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Bắt đầu tiết học</button>                
             
-            <form method="post">
+            <form method="post" style="margin-bottom: 5%">
               <h2 class="card-title text-white" style="margin-top: 2%;font-size:0.5em">Nhập thông tin</h2>
               {% csrf_token %}
               <table class="table" method="post" style="font-size:0.35em; border-radius: 10px;">
@@ -112,6 +112,13 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
               </table> 
               <button type="submit" class="btn btn-primary" style="transform: scale(0.7); width:40%;margin-left: auto; margin-right: auto; display: block; font-size: 0.5em; border-radius: 30px; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Submit</button>
             </form>
+
+            <div style="margin-bottom: 5%">
+              <h2 class="card-title text-white" style="margin-top: 2%;font-size:0.5em">Chấm điểm</h2>
+              <div class="card">
+                <button type="submit" class="btn btn-primary" style="transform: scale(0.7); width:50%;margin-left: auto; margin-right: auto; display: block; font-size: 0.5em; border-radius: 15px; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Nhập bảng điểm</button>
+              </div>
+            </div>
 
             <form method="post">
               <h2 class="card-title text-white" style="margin-top: 2%;font-size:0.5em">Đánh giá tiết học</h2>
