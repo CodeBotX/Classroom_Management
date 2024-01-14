@@ -67,13 +67,21 @@ class CustomLoginForm(AuthenticationForm):
     )
 
 
-class LessonsForm(forms.ModelForm):
-    class Meta:
-        model = Lessons
-        fields = ['classroom', 'subject', 'teacher', 'schedule_time']
+
 
 
 class ScoreForm_Test(forms.ModelForm):
     class Meta:
         model = Score
         fields = ['student','subject','K1_score', 'K2_score', 'K3_score']
+        
+class LessonReviewForm(forms.ModelForm):
+    class Meta:
+        model = LessonReview
+        fields = ['review', 'rating']
+
+
+class LessonsForm(forms.ModelForm):
+    class Meta:
+        model = Lessons
+        fields = ['classroom', 'subject', 'teacher', 'schedule_time']
