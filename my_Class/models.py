@@ -53,7 +53,7 @@ class Lessons (models.Model):
     classroom = models.ForeignKey(Class, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    schedule_time = models.DateTimeField()
+    schedule_time = models.DateTimeField(auto_now_add=True)
     counter = models.PositiveIntegerField(default=1)  # Thêm trường counter
 
     def __str__(self):
