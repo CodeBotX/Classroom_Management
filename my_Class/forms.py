@@ -73,7 +73,7 @@ class LessonsForm(forms.ModelForm):
         fields = ['classroom', 'subject', 'teacher', 'schedule_time']
 
 
-class ScoreForm(forms.ModelForm):
+class ScoreForm_Test(forms.ModelForm):
     class Meta:
         model = Score
         fields = ['student','subject','K1_score', 'K2_score', 'K3_score']

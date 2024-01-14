@@ -70,7 +70,7 @@ def student_detail(request, student_ID):
   print(my_student)
   print(subject)
   if request.method == 'POST':
-      form = ScoreForm(request.POST)
+      form = ScoreForm_Test(request.POST)
       if form.is_valid():
         try:
           score = form.save(commit=False)
@@ -79,7 +79,7 @@ def student_detail(request, student_ID):
         except Exception as e:
           print(f"An error occurred: {e}")
   else:
-        form = ScoreForm()
+        form = ScoreForm_Test()
   template = loader.get_template('details.html')
   context = {
     'student': student,
@@ -204,15 +204,15 @@ def create_lesson_view(request):
   
 
 def test_saveScore (request):
-  form=ScoreForm()
+  form=ScoreForm_Test()
   template = loader.get_template('test.html')
   if request.method == 'POST':
-        form = ScoreForm(request.POST)
+        form = ScoreForm_Test(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('test')
+            return redirect('test_Savescore')
   else:
-        form = ScoreForm()
+        form = ScoreForm_Test()
  
   context = {
     'form': form
@@ -229,12 +229,12 @@ def save_score(request):
   get_subject = get_object_or_404(Subject, id=subject_id)
   # Kiểm tra xem request có phải là POST không
   if request.method == 'POST':
-    form = ScoreForm(request.POST)
+    form = ScoreForm_Test(request.POST)
     if form.is_valid():
         form.save()
         return redirect('test')
   else:
-    form = ScoreForm()
+    form = ScoreForm_Test()
   context = {
     'form': form
   }
