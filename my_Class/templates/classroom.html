@@ -106,17 +106,21 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
 </div>
 <div class="card">
   <div class="card-body">
-        <h2>Add a Lesson</h2>
+    <h2>Add a Lesson</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form_add_lesssion.as_p }}
+        {{ form_add_lesssion.classroom }}
+        {{ form_add_lesssion.subject }}
+        {{ form_add_lesssion.teacher }}
+        {{ form_add_lesssion.schedule_time }}
         <button type="submit">Submit</button>
     </form>
 
     <h2>Review for {{ lesson }}</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form_review.as_p }}
+        {{ form_review.review }}
+        {{ form_review.rating }}
         <button type="submit">Submit</button>
     </form>
   </div>
