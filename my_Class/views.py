@@ -34,11 +34,28 @@ def classroom_view(request):
   classroom = Class.objects.get(class_CODE=class_code)
   students = Student.objects.filter(classroom=classroom)
   template = loader.get_template('classroom.html')
+  
+  if request.method == 'POST':
+    form_lession = LessonsForm(request.POST)
+    if form_lession.is_valid():
+      form_lession.save()
+      return redirect('Classroom') 
+  else:
+    form_lession = LessonsForm()
+  if request.method == 'POST':
+      form_review = LessonReviewForm(request.POST)
+      if form_review.is_valid():
+          form_review.save()
+          return redirect('classroom') 
+  else:
+      form_review = LessonReviewForm()
   context = {
       'class':classroom,
       'Students' : students,
       'current_time':now,
       'subject_code': subject,
+      'form_add_lesssion': form_lession,
+      'form_review': form_review
   }
   return HttpResponse(template.render(context,request))
 
@@ -171,38 +188,6 @@ def create_lesson_view(request):
       
 
 
-# input điểm 
-# def save_score(request):
-#   # Lấy student từ GET
-#   student_id = request.GET.get('student_id')
-#   get_student = get_object_or_404(Student, Student_ID=student_id)
-#   # Lấy subject từ session
-#   subject_id = request.session.get('subject_id')
-#   get_subject = get_object_or_404(Subject, id=subject_id)
-
-#   # Kiểm tra xem request có phải là POST không
-#   if request.method == 'POST':
-#       # Lấy điểm từ form
-#       score_type = request.POST.get('score_type')
-#       print(score_type)
-#       score_value = request.POST.get('score_value')
-
-#       # Tạo mới hoặc cập nhật điểm
-#       score, created = Score.objects.update_or_create(
-#       student=get_student,
-#       subject=get_subject,
-#       defaults={score_type: score_value},
-#     )
-#       # Kiểm tra và lưu điểm
-#       try:
-#           score.save()
-#       except ValidationError as e:
-#           # Xử lý lỗi nếu có
-#           pass
-#   # Render template
-#   return render(request, 'details.html')
-  
-
 def test_saveScore (request):
   form=ScoreForm_Test()
   template = loader.get_template('test.html')
@@ -239,3 +224,18 @@ def save_score(request):
     'form': form
   }
   return HttpResponse(template.render(context,request))
+
+
+  
+def lesson_review(request, lesson_id):
+    lesson = get_object_or_404(Lessons, pk=lesson_id)
+    if request.method == 'POST':
+        form = LessonReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.lesson = lesson
+            review.save()
+            return redirect('classroom', lesson_id=lesson.id)  # replace with your success url
+    else:
+        form = LessonReviewForm()
+    return render(request, 'classroom.html', {'form_review': form, 'lesson': lesson})

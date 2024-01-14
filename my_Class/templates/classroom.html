@@ -11,80 +11,147 @@ file này hiển thị sơ đồ lớp học và các tính năng chính của w
 
 {% block content %}
 
-<div>
-  <div>
-    <div class="container-fluid" style="margin-top: 5% ">
-      <div class="container-fluid row">
-        {% comment %} <div class="col-sm-1"></div> {% endcomment %}
-        <div class="col-sm-8">
-          <div style="  margin-bottom: 10px" class="row">
-            <div class="container" style="margin-top: 10px">
-              <div class="row">
-                <div class="col">
-                  <div class="container overflow-hidden">
-                    <div class="row">
-                      <div class="col-3">
-                       <div class="p-3 border bg-light text-center d-flex align-items-center justify-content-center" style="border-radius: 10px; height: 60px">{{ class.class_CODE }}</div>
-                      </div>
-                      <div class="col-3">
-                        <div class="p-3 border bg-light text-center d-flex align-items-center justify-content-center" style="border-radius: 10px; height: 60px">{{subject_code.subject_name}}</div>
-                      </div>  
-                    </div>
+
+
+<div class="container-fluid" style="margin-top: 5%; ">
+  <div class="container-fluid row">
+    {% comment %} <div class="col-sm-1"></div> {% endcomment %}
+    <div class="col-sm-8">
+      <div style="  margin-bottom: 10px" class="row">
+        <div class="container" style="margin-top: 10px">
+          <div class="row">
+            <div class="col">
+              <div class="container overflow-hidden">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="p-3 border bg-light text-center d-flex align-items-center justify-content-center font-weight-bold" style="border-radius: 10px; height: 60px">{{ class.class_CODE }}</div>
                   </div>
+                  <div class="col-3">
+                    <div class="p-3 border bg-light text-center d-flex align-items-center justify-content-center font-weight-bold" style="border-radius: 10px; height: 60px">{{subject_code.subject_name}}</div>
+                  </div>  
                 </div>
               </div>
             </div>
-           
           </div>
-            <div class="card" style="margin-top: 2%; margin-bottom: 1%">
-              <div class="card-body">
-                <h5 class="card-title">Sơ Đồ Lớp</h5>
-                <div class="row row-cols-4" style="margin-top: 2% margin-bottom: 2%">
-                    <tbody >
-                        {% for student in Students %}
-                        <div class="col-sm-3 mb-3">
-                            <div class="card border-primary">
-                                <div class="card-body text-center d-flex align-items-center justify-content-center" style="margin-top: 2%; margin-bottom: 1%">
-                                    <a href="{% url 'student_detail' student.student_ID %}" class="text-white btn btn-primary text-truncate" style="font-size: 1em">{{ student.student_name }}</a>
-                                </div>
-                              </div>
+        </div>
+        
+      </div>
+        <div class="card" style="margin-top: 2%; margin-bottom: 1%">
+          <div class="card-body">
+            <h5 class="card-title">Sơ Đồ Lớp</h5>
+            <div class="row row-cols-4" style="margin-top: 2% margin-bottom: 2%">
+                <tbody >
+                    {% for student in Students %}
+                    <div class="col-sm-3 mb-3">
+                        <div class="card border-primary">
+                            <div class="card-body text-center d-flex align-items-center justify-content-center" style="margin-top: 2%; margin-bottom: 1%">
+                                <a href="{% url 'student_detail' student.student_ID %}" class="text-white btn btn-primary text-truncate" style="font-size: 1em">{{ student.student_name }}</a>
+                            </div>
                           </div>
-                        {% endfor %}
-                    </tbody>
-              </div> 
-              </div>
-
-            </div>
-            
-        </div>
-        <div class="col-sm-4">
-          <div class="card display-5" style="margin-top: 10px">
-            <div class="card-body" style="height: 60px">
-              <p class="text-Blue text-center" style="font-size: 20px; ">{{ current_time }}</p>
-            </div>
+                      </div>
+                    {% endfor %}
+                </tbody>
+          </div> 
           </div>
 
-          <div class="card display-5" style="margin-top: 4%; background-color: #07478D">
-            <div class="card-body row" style="height: 5%">
-              <h5 class="card-title text-center text-white">Dạy học</h5>
-              <div class="col-1"></div>
-              <div class="col-10">
-                <button type="submit" class="btn text-white" value="Chọn" style="transform: scale(0.8); width:60%;margin-left: auto; margin-right: auto; display: block; font-size: 0.5em; border-radius: 30px; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Bắt đầu tiết học</button>                
-            
-              </div>
-              <div class="col-1"></div>
-            </div>
-          </div>
         </div>
-
+        
+    </div>
+    <div class="col-sm-4">
+      <div class="card display-5" style="margin-top: 10px">
+        <div class="card-body" style="height: 60px">
+          <p class="text-Blue text-center" style="font-size: 20px; ">{{ current_time }}</p>
+        </div>
       </div>
 
+      <div class="card display-5" style="margin-top: 4%;margin-bottom:5%; background-color: #07478D">
+        <div class="card-body row" style="height: 5%">
+          <div class="col-12">
+            <button type="submit" class="btn text-white font-weight-bold" value="Chọn" style="transform: scale(0.9); width:50%;margin-left: auto; margin-right: auto; display: block; font-size: 0.5em; border-radius: 10px; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Bắt đầu tiết học</button>                
+            
+            <form method="post">
+              <h2 class="card-title text-white" style="margin-top: 2%;font-size:0.5em">Nhập thông tin</h2>
+              {% csrf_token %}
+              <table class="table" method="post" style="font-size:0.35em; border-radius: 10px;">
+                <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Thông tin</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <th scope="row">Lớp</th>
+                      <td>
+                        {{ form_add_lesssion.classroom }}
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <th scope="row">Môn học</th>
+                      <td>        
+                        {{ form_add_lesssion.subject }}
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <th scope="row">Giáo viên</th>
+                      <td>        
+                        {{ form_add_lesssion.teacher }}
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <th scope="row">Thời gian</th>
+                      <td>        
+                        {{ form_add_lesssion.schedule_time }}
+                      </td>
+                  </tr>
+
+                </tbody>
+              </table> 
+              <button type="submit" class="btn btn-primary" style="transform: scale(0.7); width:40%;margin-left: auto; margin-right: auto; display: block; font-size: 0.5em; border-radius: 30px; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Submit</button>
+            </form>
+
+            <form method="post">
+              <h2 class="card-title text-white" style="margin-top: 2%;font-size:0.5em">Đánh giá tiết học</h2>
+              {% csrf_token %}
+              <table class="table" method="post" style="font-size:0.35em; border-radius: 10px;">
+                <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nội dung</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <th scope="row">Nhận xét</th>
+                      <td>
+                        {{ form_review.review }}
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <th scope="row">Đánh giá</th>
+                      <td>        
+                        {{ form_review.rating }}
+                      </td>
+                  </tr>
+                </tbody>
+              </table> 
+              <button type="submit" class="btn btn-primary" style="transform: scale(0.7); width:40%;margin-left: auto; margin-right: auto; display: block; font-size: 0.5em; border-radius: 30px; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Submit</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
     </div>
-    
-  </div>  
-  
+
+  </div>
+
 </div>
-    
+
+
 {% endblock %}
 
 
