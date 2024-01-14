@@ -19,7 +19,7 @@ urlpatterns = [
     path('student_grade/<int:student_ID>', views.student_grade_view, name='student_grade_view'),
     path('reviewweekend/',views.week_summary_view , name='reviewweekend'),
     # path('student/<int:student_ID>/save_score/',views.save_score, name='save_score'),
-    path('test/',views.test_saveScore, name='test'),
+    path('test/',views.test_saveScore, name='test_Savescore'),
     
 ]
 
