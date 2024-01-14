@@ -1,33 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Details{% endblock title %}
+
+
+{% block content %}
+{% comment %} <form method="post">
+    {% csrf_token %}
     <form method="post">
         {% csrf_token %}
-        <form method="post">
-            {% csrf_token %}
-            
-            <label for="{{ form.student.id_for_label }}">Student:</label>
-            {{ form.student }}
-            
-            <label for="{{ form.subject.id_for_label }}">Subject:</label>
-            {{ form.subject }}
-            
-            <label for="{{ form.K1_score.id_for_label }}">K1 Score:</label>
-            {{ form.K1_score }}
-            <label for="{{ form.K2_score.id_for_label }}">K1 Score:</label>
-            {{ form.K2_score }}
-            <label for="{{ form.K3_score.id_for_label }}">K1 Score:</label>
-            {{ form.K3_score }}
-            
-            <!-- Thêm các trường khác tương tự -->
-          
-            <button type="submit">Add Score</button>
-          </form>
-    </form>
-</body>
-</html>
+        
+        <label for="{{ form.student.id_for_label }}">Student:</label>
+        {{ form.student }}
+        
+        <label for="{{ form.subject.id_for_label }}">Subject:</label>
+        {{ form.subject }}
+        
+        <label for="{{ form.K1_score.id_for_label }}">K1 Score:</label>
+        {{ form.K1_score }}
+        <label for="{{ form.K2_score.id_for_label }}">K1 Score:</label>
+        {{ form.K2_score }}
+        <label for="{{ form.K3_score.id_for_label }}">K1 Score:</label>
+        {{ form.K3_score }}
+        
+        <!-- Thêm các trường khác tương tự -->
+        
+        <button type="submit">Add Score</button>
+        </form>
+</form> {% endcomment %}
+<div class="row" style="margin-top: 10%">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <div class="card" style="background-color: #07478D">
+            <div class="card-body">
+                <h2 class="card-title text-white" style="margin-top: 2%;">  Chấm điểm</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <table class="table" method="post">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Điểm</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Học sinh</th>
+                            <td><label for="{{ form.student.id_for_label }}"></label>
+                                {{ form.student }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Môn học</th>
+                            <td><label for="{{ form.subject.id_for_label }}"></label>
+                                {{ form.subject }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Điểm K1</th>
+                            <td><label for="{{ form.K1_score.id_for_label }}"></label>
+                                {{ form.K1_score }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Điểm K2</th>
+                            <td><label for="{{ form.K2_score.id_for_label }}"></label>
+                                {{ form.K2_score }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Điểm K3</th>
+                            <td><label for="{{ form.K3_score.id_for_label }}"></label>
+                                {{ form.K3_score }}
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-primary" style="transform: scale(1.0); width:30%; margin-top: 3%; margin-left: auto; margin-right: auto; display: block; font-size: 1em; background-image: linear-gradient(to right, #126DBC, #8C52FF);border: none;">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div> 
+    <div class="col-2"></div>   
+</div>
+{% endblock content %}
