@@ -8,7 +8,7 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
 
-    path('home/', CustomLoginView.as_view(template_name='login.html'), name='home'),
+    path('', CustomLoginView.as_view(template_name='login.html'), name='home'),
     path('option/', views.option_view, name='option'),
     path('classroom/',views.classroom_view , name='Classroom'),
     path('register/', views.register_view, name='register'),
@@ -18,8 +18,7 @@ urlpatterns = [
     # 
     path('student_grade/<int:student_ID>', views.student_grade_view, name='student_grade_view'),
     path('reviewweekend/',views.week_summary_view , name='reviewweekend'),
-    # path('student/<int:student_ID>/save_score/',views.save_score, name='save_score'),
-    path('test/',views.test_saveScore, name='test_Savescore'),
+    path('Savescore/',views.test_saveScore, name='Savescore'),
     
 ]
 

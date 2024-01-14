@@ -78,7 +78,7 @@ class ScoreForm_Test(forms.ModelForm):
 class LessonReviewForm(forms.ModelForm):
     class Meta:
         model = LessonReview
-        fields = ['review', 'rating']
+        fields = ['lesson', 'review', 'rating']
 
 
 class LessonsForm(forms.ModelForm):

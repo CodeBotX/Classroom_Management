@@ -46,7 +46,7 @@ def classroom_view(request):
       form_review = LessonReviewForm(request.POST)
       if form_review.is_valid():
           form_review.save()
-          return redirect('classroom') 
+          return redirect('Classroom') 
   else:
       form_review = LessonReviewForm()
   context = {
@@ -135,10 +135,14 @@ def student_grade_view(request, student_ID):
 
 
 def week_summary_view(request):
-  reviews = LessonReview.objects.all()  # Lấy tất cả đánh giá
+  class_code = request.session.get('class_code', None)
+  lessons = Lessons.objects.filter(classroom__class_CODE=class_code)
+  reviews = LessonReview.objects.filter(lesson__in=lessons)
+  # reviews = LessonReview.objects.all()  # Lấy tất cả đánh giá
   template = loader.get_template('week_summary.html')
   context = {
-    'week_review':reviews
+    'week_review':reviews,
+    'class':class_code
   }
   return HttpResponse(template.render(context,request))
 
@@ -195,7 +199,7 @@ def test_saveScore (request):
         form = ScoreForm_Test(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('test_Savescore')
+            return redirect('Savescore')
   else:
         form = ScoreForm_Test()
  
@@ -225,17 +229,3 @@ def save_score(request):
   }
   return HttpResponse(template.render(context,request))
 
-
-  
-def lesson_review(request, lesson_id):
-    lesson = get_object_or_404(Lessons, pk=lesson_id)
-    if request.method == 'POST':
-        form = LessonReviewForm(request.POST)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.lesson = lesson
-            review.save()
-            return redirect('classroom', lesson_id=lesson.id)  # replace with your success url
-    else:
-        form = LessonReviewForm()
-    return render(request, 'classroom.html', {'form_review': form, 'lesson': lesson})
