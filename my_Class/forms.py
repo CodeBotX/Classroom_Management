@@ -79,6 +79,10 @@ class LessonReviewForm(forms.ModelForm):
     class Meta:
         model = LessonReview
         fields = ['lesson', 'review', 'rating']
+        widgets = {
+            'lesson': forms.Select(attrs={'class': 'form-control'}),
+            
+        }
 
 
 class LessonsForm(forms.ModelForm):
